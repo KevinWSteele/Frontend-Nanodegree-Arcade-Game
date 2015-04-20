@@ -1,0 +1,6 @@
+References for Project 3 - Kevin Steele
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript
+http://www.w3schools.com/
+Udacity's forum: http://discussions.udacity.com/c/nd001-2015-02-04/project-3
+Office hours video: https://plus.google.com/events/cupbs3pbne7qkuqok4g0ldhntic?authkey=COGW25b5jbv3-AE

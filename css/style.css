@@ -1,6 +1,26 @@
 body {
     text-align: center;
 }
-#score{
+
+#score {
     font-size: 150%;
+    margin-top: 5px;
+}
+
+li {
+    padding-left: 20px;
+    margin-left: 90px;
+    text-align: left;
+}
+
+.titles {
+    width: 500px;
+    float: left;
+    margin-right: -100px;
+    margin-top: 225px;
+    text-align: center
+}
+
+.game {
+    margin-top: -30px;
 }

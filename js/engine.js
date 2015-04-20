@@ -86,16 +86,18 @@ var Engine = (function(global) {
     /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
-     * player object. These update methods should focus purely on updating
-     * the data/properties related to  the object. Do your drawing in your
-     * render methods.
+     * player object and your star object. These update methods should focus
+     * purely on updating the data/properties related to  the object.
+     * Do your drawing in your render methods.
      */
+    
     function updateEntities(dt) {
-        
+
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
         player.update();
+        star.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -143,7 +145,7 @@ var Engine = (function(global) {
 
     /* This function is called by the render function and is called on each game
      * tick. It's purpose is to then call the render functions you have defined
-     * on your enemy and player entities within app.js
+     * on your enemy, star, and player entities within app.js
      */
     function renderEntities() {
         /* Loop through all of the objects within the allEnemies array and call
@@ -154,7 +156,9 @@ var Engine = (function(global) {
         });
 
         player.render();
+        star.render();
     }
+
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
@@ -164,6 +168,11 @@ var Engine = (function(global) {
         // noop
     }
 
+    function updateStar(dt) {
+
+        star.update();
+        player.update();
+    }
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
@@ -173,7 +182,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Star.png'
     ]);
     Resources.onReady(init);
 
