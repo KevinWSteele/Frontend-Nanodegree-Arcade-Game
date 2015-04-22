@@ -13,11 +13,16 @@ li {
     text-align: left;
 }
 
+p {
+    color: green;
+    font-size: 200%;
+}
+
 .titles {
     width: 500px;
     float: left;
-    margin-right: -100px;
-    margin-top: 225px;
+    margin-right: -200px;
+    margin-top: 150px;
     text-align: center
 }
 

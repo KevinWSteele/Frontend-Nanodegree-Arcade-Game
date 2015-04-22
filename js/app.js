@@ -6,35 +6,40 @@ var numEnemies = 3; //sets the number of bugs
 
 var Star = function() {
     this.star = "images/Star.png";
-    var randomRow = Math.random();
-    //randomly assign the star to a row + column
-    if (randomRow < 0.33) {
-        this.y = 63;
-    }
-    else if (randomRow < 0.66) {
-        this.y = 146;
-    }
-    else {
-        this.y = 229;
-    };
 
-    var randomCol = Math.random();
+    this.randStar = function(){
 
-    if (randomCol < 0.20) {
-        this.x = 0;
-    }
-    else if (randomCol < 0.40) {
-        this.x = 101;
-    }
-    else if (randomCol < 0.60) {
-        this.x = 202;
-    }
-    else if (randomCol < 0.80) {
-        this.x = 303;
-    }
-    else {
-        this.x = 404;
+        var randomRow = Math.random();
+        //randomly assign the star to a row + column
+        if (randomRow < 0.33) {
+            this.y = 63;
+        }
+        else if (randomRow < 0.66) {
+            this.y = 146;
+        }
+        else {
+            this.y = 229;
+        };
+
+        var randomCol = Math.random();
+
+        if (randomCol < 0.20) {
+            this.x = 0;
+        }
+        else if (randomCol < 0.40) {
+            this.x = 101;
+        }
+        else if (randomCol < 0.60) {
+            this.x = 202;
+        }
+        else if (randomCol < 0.80) {
+            this.x = 303;
+        }
+        else {
+            this.x = 404;
+        };
     };
+    this.randStar();
 };
 
 
@@ -52,13 +57,13 @@ var Enemy = function() {
 
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
-    var randomrow  = Math.random();
+    var randomRow  = Math.random();
 
     //randomly assign the enemies to a row + column
-    if (randomrow < 0.33) {
+    if (randomRow < 0.33) {
         this.y = 63; //bug in first stone row
     }
-    else if (randomrow < 0.66) {
+    else if (randomRow < 0.66) {
         this.y = 146;
     }
     else {
@@ -67,10 +72,10 @@ var Enemy = function() {
 
     this.speed = Math.random()
     if (this.speed < 0.25) {
-        this.speed = 20;
+        this.speed = 60;
     }
     else if (this.speed < 0.50) {
-        this.speed = 80;
+        this.speed = 95;
     }
     else if (this.speed < 0.75) {
         this.speed = 200;
@@ -111,7 +116,7 @@ var Player = function(){
 };
 
 Star.prototype.update = function(dt){
-
+    star.collide();
 };
 
 //displays score at bottom of screen
@@ -123,7 +128,7 @@ Player.prototype.update = function(dt){
 
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.player), this.x, this.y);
-}
+};
 
 //tells the game what to do when various keys are pressed
 Player.prototype.handleInput = function (keys) {
@@ -163,34 +168,34 @@ Player.prototype.handleInput = function (keys) {
             };
             if (this.y > 395) {
                 this.y = 395;
-            }
+            };
             break;
         case "space": //use the space bar to change the bug positions
             for (i = 0; i < numEnemies; i++) {
-            var randomrow  = Math.random();
-            if (randomrow < 0.33) {
-                allEnemies[i].y = 63;
-            }
-            else if (randomrow < 0.66) {
-                allEnemies[i].y = 146;
-            }
-            else {
-                allEnemies[i].y = 229;
-            }
+                var randomrow  = Math.random();
+                if (randomrow < 0.33) {
+                    allEnemies[i].y = 63;
+                }
+                else if (randomrow < 0.66) {
+                    allEnemies[i].y = 146;
+                }
+                else {
+                    allEnemies[i].y = 229;
+                }
 
-            enemy.speed = Math.random()
-            if (enemy.speed < 0.25) {
-                allEnemies[i].speed = 20;
-            }
-            else if (enemy.speed < 0.50) {
-                allEnemies[i].speed = 80;
-            }
-            else if (enemy.speed < 0.75) {
-                allEnemies[i].speed = 200;
-            }
-            else {
-                allEnemies[i].speed = 130;
-            };
+                enemy.speed = Math.random()
+                if (enemy.speed < 0.25) {
+                    allEnemies[i].speed = 60;
+                }
+                else if (enemy.speed < 0.50) {
+                    allEnemies[i].speed = 95;
+                }
+                else if (enemy.speed < 0.75) {
+                    allEnemies[i].speed = 200;
+                }
+                else {
+                    allEnemies[i].speed = 130;
+                };
             };
             break;
     };
@@ -202,59 +207,33 @@ Player.prototype.reset = function(){
     this.y = 395;
 };
 
-//function for what happens if the player hit a bug or star
+//function for what happens if the player hit a bug
 Player.prototype.collide = function() {
     var pleft = this.x + 15;
     var pright = this.x + 85;
 
     //reset if player hits bug and subtract point from score
     for (i = 0; i < allEnemies.length; i++) {
-    var bright = allEnemies[i].x + 90;
-    var bleft = allEnemies[i].x;
-    if (this.y === allEnemies[i].y ) {
-       if (bright > pleft && bleft < pright) {
-            this.score = this.score - 1;
-            player.reset();
+        var bright = allEnemies[i].x + 90;
+        var bleft = allEnemies[i].x;
+        if (this.y === allEnemies[i].y ) {
+            if (bright > pleft && bleft < pright) {
+                this.score = this.score - 1;
+                player.reset();
+            };
         };
     };
-    };
 
+};
+
+Star.prototype.collide = function(){
     //add point to score and reset star if player hits star
-   if (star.x === this.x && this.y === star.y) {
-
-        this.score = this.score + 1;
-
-        var randomRow = Math.random();
-        if (randomRow < 0.33) {
-            star.y = 63;
-        }
-        else if (randomRow < 0.66) {
-            star.y = 146;
-        }
-        else {
-            star.y = 229;
-        }
-
-        var randomCol = Math.random();
-
-        if (randomCol < 0.20) {
-            star.x = 0;
-        }
-        else if (randomCol < 0.40){
-            star.x = 101;
-        }
-        else if (randomCol < 0.60){
-            star.x = 202;
-        }
-        else if (randomCol < 0.80){
-            star.x = 303;
-        }
-        else {
-            star.x = 404;
-        };
-
+   if (this.x === player.x && this.y === player.y) {
+        player.score = player.score + 1;
+        star.randStar();
     };
 };
+
 //instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
