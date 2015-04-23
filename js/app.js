@@ -57,32 +57,36 @@ var Enemy = function() {
 
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
-    var randomRow  = Math.random();
 
-    //randomly assign the enemies to a row + column
-    if (randomRow < 0.33) {
-        this.y = 63; //bug in first stone row
-    }
-    else if (randomRow < 0.66) {
-        this.y = 146;
-    }
-    else {
-        this.y = 229;
-    }
+    this.randEnemy = function(){
+        var randomRow  = Math.random();
 
-    this.speed = Math.random()
-    if (this.speed < 0.25) {
-        this.speed = 60;
-    }
-    else if (this.speed < 0.50) {
-        this.speed = 95;
-    }
-    else if (this.speed < 0.75) {
-        this.speed = 200;
-    }
-    else {
-        this.speed = 130;
-    }
+        //randomly assign the enemies to a row + column
+        if (randomRow < 0.33) {
+            this.y = 63; //bug in first stone row
+        }
+        else if (randomRow < 0.66) {
+            this.y = 146;
+        }
+        else {
+            this.y = 229;
+        };
+
+        this.speed = Math.random();
+        if (this.speed < 0.25) {
+            this.speed = 60;
+        }
+        else if (this.speed < 0.50) {
+            this.speed = 95;
+        }
+        else if (this.speed < 0.75) {
+            this.speed = 200;
+        }
+        else {
+            this.speed = 130;
+        };
+    };
+    this.randEnemy();
 };
 
 
@@ -172,30 +176,7 @@ Player.prototype.handleInput = function (keys) {
             break;
         case "space": //use the space bar to change the bug positions
             for (i = 0; i < numEnemies; i++) {
-                var randomrow  = Math.random();
-                if (randomrow < 0.33) {
-                    allEnemies[i].y = 63;
-                }
-                else if (randomrow < 0.66) {
-                    allEnemies[i].y = 146;
-                }
-                else {
-                    allEnemies[i].y = 229;
-                }
-
-                enemy.speed = Math.random()
-                if (enemy.speed < 0.25) {
-                    allEnemies[i].speed = 60;
-                }
-                else if (enemy.speed < 0.50) {
-                    allEnemies[i].speed = 95;
-                }
-                else if (enemy.speed < 0.75) {
-                    allEnemies[i].speed = 200;
-                }
-                else {
-                    allEnemies[i].speed = 130;
-                };
+                allEnemies[i].randEnemy();
             };
             break;
     };
@@ -238,8 +219,8 @@ Star.prototype.collide = function(){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-player = new Player();
-star = new Star();
+var player = new Player();
+var star = new Star();
 
 for (i = 0; i < numEnemies; i++) {
     var enemy = new Enemy();
