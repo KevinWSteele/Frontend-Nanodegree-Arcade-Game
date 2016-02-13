@@ -99,6 +99,11 @@ Enemy.prototype.update = function(dt) {
     }
     if (this.x > canvasWidth) {
         this.x = 0
+        this.randEnemy();
+        /* for (i = 0; i < numEnemies; i++) {
+                allEnemies[i].randEnemy();
+            };*/
+        
     };
 };
     // You should multiply any movement by the dt parameter
@@ -174,11 +179,11 @@ Player.prototype.handleInput = function (keys) {
                 this.y = 395;
             };
             break;
-        case "space": //use the space bar to change the bug positions
+        /*case "space": //use the space bar to change the bug positions
             for (i = 0; i < numEnemies; i++) {
                 allEnemies[i].randEnemy();
             };
-            break;
+            break;*/
     };
 
 };

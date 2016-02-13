@@ -9,7 +9,7 @@ body {
 
 li {
     padding-left: 20px;
-    margin-left: 90px;
+    margin-left: 60px;
     text-align: left;
 }
 
@@ -19,10 +19,10 @@ p {
 }
 
 .titles {
-    width: 500px;
+    width: 450px;
     float: left;
-    margin-right: -200px;
-    margin-top: 150px;
+    margin-right: -40px;
+    margin-top: 40px;
     text-align: center
 }
 
